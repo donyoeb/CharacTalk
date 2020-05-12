@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/maincolor"
+android:orientation="vertical"
+tools:context=".Main2Activity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="7"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/appimg" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.5"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:fontFamily="@font/mainfont"
+            android:text="캐릭톡"
+            android:textSize="32dp"/>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:fontFamily="@font/mainfont"
+            android:text="#로그인서비스"
+            android:textSize="18dp"/>
+    </LinearLayout>
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="4"
+    android:orientation="vertical"
+    android:padding="40dp">
+
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:fontFamily="@font/mainfont"
+        android:hint="Nickname"
+        android:inputType="textPersonName"
+        android:paddingTop="50dp" />
+
+    <EditText
+
+        android:id="@+id/pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Password"
+        android:fontFamily="@font/mainfont"
+        android:paddingTop="50dp"/>
+
+    <EditText
+
+        android:id="@+id/lang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="사용가능한 언어"
+        android:fontFamily="@font/mainfont"
+        android:paddingTop="50dp"/>
+
+    <Spinner
+        android:id="@+id/character"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ems="10"
+        android:entries="@array/캐릭터"
+        android:fontFamily="@font/mainfont"
+        android:paddingTop="50dp"/>
+
+
+
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="horizontal"
+    android:layout_weight="0.5"
+    android:padding="55dp">
+
+    <Button
+        android:id="@+id/btnlogin"
+        android:layout_width="185dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/button"
+        android:fontFamily="@font/mainfont"
+        android:text="ENTER" />
+
+
+</LinearLayout>
+</LinearLayout>

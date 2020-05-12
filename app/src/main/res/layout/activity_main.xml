@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <fragment
+        android:id="@+id/map"
+        class="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="665dp"
+        android:background="@color/maincolor"
+        android:text="TextView"
+        android:textColor="@color/maincolor"
+        android:textSize="50dp" />
+
+
+    <Button
+        android:id="@+id/buttonmap1"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@id/map"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="675dp"
+        android:layout_weight="1"
+        android:background="@drawable/button"
+        android:fontFamily="@font/mainfont"
+        android:text="채팅 기능" />
+
+    <Button
+        android:id="@+id/buttonmap2"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@id/map"
+        android:layout_marginLeft="113dp"
+        android:layout_marginTop="675dp"
+        android:layout_weight="1"
+        android:background="@drawable/button"
+        android:fontFamily="@font/mainfont"
+        android:text="주변 캐릭터 보기" />
+    <Button
+        android:id="@+id/buttonmap3"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="110dp"
+        android:layout_alignLeft="@id/map"
+        android:layout_marginLeft="313dp"
+        android:layout_weight="1"
+        android:background="@drawable/button"
+        android:fontFamily="@font/mainfont"
+        android:text="캐릭터 클릭 전에 누르기" />
+
+    <Button
+        android:id="@+id/buttonmap4"
+
+        android:layout_marginTop="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@id/map"
+        android:layout_marginLeft="320dp"
+        android:layout_weight="1"
+        android:background="@drawable/button"
+        android:fontFamily="@font/mainfont"
+        android:text="탑 클릭 전에 누르기" />
+
+    <Button
+        android:id="@+id/buttonmap5"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@id/map"
+        android:layout_marginLeft="215dp"
+        android:layout_weight="1"
+        android:layout_marginTop="675dp"
+        android:text="내 정보"
+        android:background="@drawable/button"
+        android:fontFamily="@font/mainfont"/>
+
+    <Button
+        android:id="@+id/buttonmap6"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@id/map"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="675dp"
+        android:layout_weight="1"
+        android:text="번역"
+        android:background="@drawable/button"
+        android:fontFamily="@font/mainfont"/>
+
+
+
+</RelativeLayout>

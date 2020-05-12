@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    tools:context=".SubActivity5"
+    android:orientation="vertical">
+
+   <LinearLayout
+       android:orientation="horizontal"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+      <TextView
+          android:text="Imformation"
+          android:textSize="20sp"
+          android:textColor="#fff"
+          android:gravity="center"
+          android:background="@color/maincolor"
+          android:layout_width="match_parent"
+          android:fontFamily="@font/mainfont"
+          android:layout_height="53dp"/>
+   </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="263dp"
+       android:orientation="vertical"
+       android:padding="24dp">
+
+      <ImageView
+          android:id="@+id/userimg"
+          android:layout_width="match_parent"
+          android:layout_height="96dp"
+          android:layout_marginBottom="3dp"
+
+          android:layout_margin="5dp"/>
+      <LinearLayout
+          android:orientation="horizontal"
+
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+         <TextView
+             android:layout_weight="1"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_margin="5dp"
+             android:layout_marginBottom="3dp"
+             android:alpha="0.87"
+             android:fontFamily="@font/mainfont"
+             android:gravity="center"
+             android:textColor="#000"
+             android:textSize="15sp"
+             android:text="유저 닉네임 : " />
+
+         <TextView
+             android:id="@+id/nicktext"
+             android:layout_weight="1"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_margin="5dp"
+             android:layout_marginBottom="3dp"
+             android:alpha="0.87"
+             android:fontFamily="@font/mainfont"
+             android:gravity="center"
+             android:textColor="#000"
+             android:textSize="15sp" />
+      </LinearLayout>
+
+      <LinearLayout
+          android:orientation="horizontal"
+
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+         <TextView
+             android:layout_weight="1"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_margin="5dp"
+             android:layout_marginBottom="3dp"
+             android:alpha="0.87"
+             android:fontFamily="@font/mainfont"
+             android:gravity="center"
+             android:textColor="#000"
+             android:textSize="15sp"
+             android:text="사용하는 언어 : " />
+
+         <TextView
+             android:layout_weight="1"
+             android:id="@+id/langtext"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:fontFamily="@font/mainfont"
+             android:layout_marginBottom="3dp"
+             android:alpha="0.87"
+             android:gravity="center"
+             android:textColor="#000"
+             android:textSize="15sp"
+             android:layout_margin="5dp"/>
+      </LinearLayout>
+
+
+
+
+
+      <Button
+          android:id="@+id/chatbt"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="80dp"
+          android:text="1:1 채팅">
+
+      </Button>
+
+   </LinearLayout>
+
+   <View
+       android:background="#66bdbdbd"
+       android:layout_width="match_parent"
+       android:layout_height="1dp"/>
+   <LinearLayout
+       android:orientation="horizontal"
+       android:gravity="center"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+      <Button
+          android:text="확인"
+          android:textSize="15sp"
+          android:textColor="#ff7a00"
+          android:padding="16dp"
+          android:gravity="center"
+          android:background="@drawable/button"
+          android:fontFamily="@font/mainfont"
+          android:layout_width="match_parent"
+          android:layout_height="53dp"
+          android:onClick="mOnClose"/>
+
+   </LinearLayout>
+
+
+
+</LinearLayout>

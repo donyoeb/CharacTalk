@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.google.wjddidgns22">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/marker1"
+        android:label="캐릭톡"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Main2Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".SubActivity" />
+        <activity android:name=".SubActivity2" />
+        <activity android:name=".SubActivity3" />
+        <activity android:name=".SubActivity4" />
+        <activity android:name=".SubActivity5"
+            android:theme="@style/popupTheme"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity android:name=".SubActivity6" />
+        <activity android:name=".SubActivity7"/>
+        <activity android:name=".SubActivity8"/>
+
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAGnC7XpaF5TSLP8htMckKrJsZZnuFFh1Y" />
+    </application>
+
+</manifest>
