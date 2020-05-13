@@ -47,9 +47,10 @@
             android:id="@+id/textBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="크롤링결과" />
+            android:text="크롤링결과 나올곳" />
 
 
 
 
-    </ScrollView></LinearLayout>
+    </ScrollView>
+</LinearLayout>

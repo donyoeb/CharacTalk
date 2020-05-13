@@ -1,4 +1,5 @@
 package com.google.wjddidgns22;
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +19,8 @@ public class SubActivity4 extends AppCompatActivity {
     Elements contents;
     Document doc = null;
     String Top10;//결과를 저장할 문자열변수
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,4 +61,7 @@ public class SubActivity4 extends AppCompatActivity {
             }
         });
     }
+       
 }
+
+
