@@ -26,12 +26,30 @@
             android:layout_height="wrap_content"
             android:text="버튼"
             />
+
+
     </LinearLayout>
 
-    <android.support.v7.app.AlertController.RecycleView
-        android:id="@+id/recyclerview"
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:text="갱신하기"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:background="#ffbebe"
+        android:id="@+id/reload"/>
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="text" />
 
-    </android.support.v7.app.AlertController.RecycleView>
-</LinearLayout>
+
+
+
+    </ScrollView></LinearLayout>
