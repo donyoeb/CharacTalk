@@ -35,7 +35,7 @@ public class SubActivity4 extends AppCompatActivity {
                         try {
                             doc = Jsoup.connect("https://datalab.naver.com/keyword/realtimeList.naver?age=20s&entertainment=-1&groupingLevel=1&marketing=-1&news=-1&sports=-1").get(); //naver페이지를 불러옴
                             contents = doc.select("div.ranking_box");//셀렉터로 span태그중 class값이 ah_k인 내용을 가져옴
-                        } catch (IOException e) {
+                        } catch (IOException e) {    // 네이버 블로그 긁어올거 추가하기
                             e.printStackTrace();
                         }
                         Top10 = "";

@@ -47,7 +47,7 @@
             android:id="@+id/textBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="text" />
+            android:text="크롤링결과" />
 
 
 
