@@ -1,5 +1,4 @@
 package com.google.wjddidgns22;
-import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,13 +12,14 @@ import java.io.IOException;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class SubActivity4 extends AppCompatActivity {
+
     TextView textView; //결과를 띄어줄 TextView
     TextView reload; //reload버튼
     Elements contents;
     Document doc = null;
     String Top10;//결과를 저장할 문자열변수
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class SubActivity4 extends AppCompatActivity {
                         try {
                             doc = Jsoup.connect("https://datalab.naver.com/keyword/realtimeList.naver?age=20s&entertainment=-1&groupingLevel=1&marketing=-1&news=-1&sports=-1").get(); //naver페이지를 불러옴
                             contents = doc.select("div.ranking_box");//셀렉터로 span태그중 class값이 ah_k인 내용을 가져옴
-                        } catch (IOException e) {    // 네이버 블로그 긁어올거 추가하기
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
                         Top10 = "";
@@ -61,7 +61,4 @@ public class SubActivity4 extends AppCompatActivity {
             }
         });
     }
-       
 }
-
-
