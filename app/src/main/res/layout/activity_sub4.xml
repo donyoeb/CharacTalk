@@ -9,37 +9,39 @@
         android:orientation="horizontal">
 
         <EditText
+            android:id="@+id/edtext"
             android:layout_width="146dp"
             android:layout_height="wrap_content" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="버튼"
+            android:text="버튼1"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="버튼"
+            android:text="버튼2"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="버튼"
+            android:text="버튼3"
             />
 
 
     </LinearLayout>
 
 
-    <TextView
+    <Button
+        android:id="@+id/findbt"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:text="갱신하기"
-        android:textSize="40sp"
-        android:gravity="center"
-        android:textStyle="bold"
+        android:layout_height="wrap_content"
         android:background="#ffbebe"
-        android:id="@+id/reload"/>
+        android:gravity="center"
+        android:text="찾기"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

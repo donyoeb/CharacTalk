@@ -7,24 +7,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -37,7 +32,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -51,9 +45,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
-import java.text.CollationElementIterator;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -919,10 +911,9 @@ public class MainActivity extends AppCompatActivity
                  */
 
                 if (markerstate.equals("top")) {
-                    Intent intent2 = new Intent(MainActivity.this, SubActivity4.class); // MainActivity -> SubActivity4
-                    intent2.putExtra("이름", markername); //탑 이름
-                    intent2.putExtra("위치", location);  // 탑 위치
-                    startActivity(intent2); // 액티비티를 시작해보아요!
+                    Intent intent5 = new Intent(MainActivity.this, SubActivity4.class); // MainActivity -> SubActivity4
+                    intent5.putExtra("탑이름", markername); //탑 이름
+                    startActivity(intent5); // 액티비티를 시작해보아요!
                 }
                 else{
                     Toast.makeText(MainActivity.this,"                                ★ 오류 ★\n1. 우측의 해당하는 '클릭 전 누르기' 버튼을 눌러주세요." +
