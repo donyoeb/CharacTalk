@@ -9,13 +9,15 @@
         android:orientation="horizontal">
 
         <EditText
+            android:hint="검색할 단어 입력"
             android:id="@+id/edtext"
             android:layout_width="146dp"
             android:layout_height="wrap_content" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="버튼1"
+            android:id="@+id/matjip"
+            android:text="맛집"
             />
         <Button
             android:layout_width="wrap_content"
@@ -42,14 +44,12 @@
         android:textSize="40sp"
         android:textStyle="bold" />
 
-    <ScrollView
+
+    <ListView
+        android:id="@+id/lview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/textBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="text" />
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:text="text" />
+
 
 </LinearLayout>
