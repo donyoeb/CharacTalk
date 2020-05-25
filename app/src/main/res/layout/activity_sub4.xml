@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -16,18 +18,20 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/matjip"
+            android:id="@+id/bt1"
             android:text="맛집"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="버튼2"
+            android:id="@+id/bt2"
+            android:text="가볼곳"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="버튼3"
+            android:id="@+id/bt3"
+            android:text="데이트"
             />
 
 
@@ -35,13 +39,16 @@
 
 
     <Button
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
         android:id="@+id/findbt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:background="#ffbebe"
         android:gravity="center"
-        android:text="찾기"
-        android:textSize="40sp"
+        android:text="검색 단어로 찾기"
         android:textStyle="bold" />
 
 

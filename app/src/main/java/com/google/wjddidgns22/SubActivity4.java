@@ -1,9 +1,11 @@
 package com.google.wjddidgns22;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -17,13 +19,19 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 public class SubActivity4 extends AppCompatActivity {
 
+    private ArrayList<String> blogtitle = new ArrayList<>();   // 저장을 위한 리스트
 
+    public int pagecnt=1;
     public EditText editText; //검색할 edittex
+
     public Button findbt; //찾기 버튼
     public Button matbt; //맛집
+    public Button gobt; //가볼곳
+    public Button datebt; //데이트
 
     public String topname;
     public ListView list_view;
@@ -33,8 +41,6 @@ public class SubActivity4 extends AppCompatActivity {
 
     Document doc = null;
 
-      // private ArrayAdapter<String> adapter;
-        private ArrayList<Blog_item> blog_item_list;
         private MyAdapter adapter = new MyAdapter();
 
 
@@ -47,142 +53,241 @@ public class SubActivity4 extends AppCompatActivity {
         final String id = intent2.getExtras().getString("탑이름"); // 오벨리스크 이름
         topname = id;
 
-        Toast.makeText(SubActivity4.this, id, Toast.LENGTH_SHORT).show(); // 이름 보여주기
-
+        ActionBar ab = getSupportActionBar() ;
+        ab.setTitle(id) ;
 
         editText = (EditText) findViewById(R.id.edtext);
         list_view = (ListView) findViewById(R.id.rview);
 
 
-       /* adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line,
-                new ArrayList<String>());
-        list_view.setAdapter(adapter);*/
-
-
-
-        matbt = (Button) findViewById(R.id.matjip);
-        matbt.setOnClickListener(new View.OnClickListener() {//onclicklistener를 연결하여 터치시 실행됨
-
-            @Override
-            public void onClick(View v) {
-
-                new AsyncTask() {//AsyncTask객체 생성
-
-                    @Override
-                    protected Object doInBackground(Object[] params) {
-
-                        String url, urlnum;
-                        //for (int i=1;i<102;i=i+10) { }  //검색 여러번하기
-                        url = "https://search.naver.com/search.naver?where=post&sm=tab_jum&query=";  //네이버 블로그 url
-                        serch = "맛집";
-                        //   urlnum = "&sm=tab_pge&srchby=all&st=sim&where=post&start=";
-                        //&sm=tab_pge&srchby=all&st=sim&where=post&start=1  // 1~10, 11~20. 21~30.....
-                        //  int urlcnt = 1;
-                        //  urlcnt= urlcnt+10;  // 블로그 숫자 카운트
-
-                        try {
-                            doc = Jsoup.connect(url + topname + serch).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
-                            contents = doc.select("div[class=blog section _blogBase _prs_blg]");
-                           // int contentsize = contents.size();
-
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Object o) {
-                        super.onPostExecute(o);
-
-                        adapter = new MyAdapter();
-                        for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
-                            for (int i = 1; i < 11; i++) {
-                               String img = elem.select("li[id=sp_blog_"+i+"]").select("div[class=thumb thumb-rollover] a img").attr("src");
-                                String  title = elem.select("li[id=sp_blog_"+i+"]").select("a[title]").text();
-                                String  day = elem.select("li[id=sp_blog_"+i+"]").select("dd[class=txt_inline]").text();
-                                //adapter.add(img);
-                              //  adapter.add(title);
-                               // adapter.add(day);
-                                adapter.addItem(title,img,"등록일 : "+ day);
-                            }
-                        }
-
-                       // adapter.notifyDataSetChanged();
-                       // list_view.setSelection(adapter.getCount() - 1);
-
-                        list_view.setAdapter(adapter);
-                    }
-
-                }.execute();
-
-            }
-        });
-
-        /*
         findbt = (Button) findViewById(R.id.findbt);
         findbt.setOnClickListener(new View.OnClickListener() {//onclicklistener를 연결하여 터치시 실행됨
 
             @Override
             public void onClick(View v) {
 
-                adapter.clear();
+                for (pagecnt = 1; pagecnt <= 31; pagecnt = pagecnt + 10) { // i로 페이지값 넘기면서 값 가져오기
 
-                new AsyncTask() {//AsyncTask객체 생성
+                    new AsyncTask() {//AsyncTask객체 생성
 
-                    @SuppressLint("WrongThread")
-                    @Override
-                    protected Object doInBackground(Object[] params) {
+                        @SuppressLint("WrongThread")
+                        @Override
+                        protected Object doInBackground(Object[] params) {
 
-                        String url,urlnum;
-                        //for (int i=1;i<102;i=i+10) { }  //검색 여러번하기
-                        url = "https://search.naver.com/search.naver?where=post&sm=tab_jum&query=";  //네이버 블로그 url
-                        serch = editText.getText().toString();
-                        //   urlnum = "&sm=tab_pge&srchby=all&st=sim&where=post&start=";
-                        //&sm=tab_pge&srchby=all&st=sim&where=post&start=1  // 1~10, 11~20. 21~30.....
-                        //  int urlcnt = 1;
-                        //  urlcnt= urlcnt+10;  // 블로그 숫자 카운트
+                            String url, urlnum;
 
-                        try {
-                            doc = Jsoup.connect(url+topname+serch).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
-                            contents = doc.select("div[class=blog section _blogBase _prs_blg]");
-                            int contentsize = contents.size();
+                            url = "https://search.naver.com/search.naver?where=post&sm=tab_jum&query=";  //네이버 블로그 url
+                            serch = editText.getText().toString();
+                            urlnum = "&sm=tab_pge&srchby=all&st=sim&where=post&start=";
+                            //&sm=tab_pge&srchby=all&st=sim&where=post&start=1  // 1~10, 11~20. 21~30.....
 
+                            try {
+                                doc = Jsoup.connect(url + topname + serch + urlnum + pagecnt).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
+                                contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
                         }
-                        catch (IOException e) {
-                            e.printStackTrace();
+                        @Override
+                        protected void onPostExecute(Object o) {
+                            super.onPostExecute(o);
+
+                            for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
+                                for (int i = 1; i < 11; i++) {
+                                    String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
+                                    String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
+                                    String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
+
+                                    adapter.addItem(title, img, "등록일 : " + day);
+                                }
+                            }
                         }
+                    }.execute();
 
-
-
-                        return null;
-                    }
-                    @Override
-                    protected void onPostExecute(Object o) {
-                        super.onPostExecute(o);
-                        for (Element elem : contents){//li[id=sp_blog_1~10]
-                            for (int i = 1;i<11;i++){
-                                String img = elem.select("li[id=sp_blog_"+i+"]").select("div[class=thumb thumb-rollover] a img").attr("src");
-                                String  title = elem.select("li[id=sp_blog_"+i+"]").select("a[title]").text();
-                                String  day = elem.select("li[id=sp_blog_"+i+"]").select("dd[class=txt_inline]").text();
-                                adapter.add(img);
-                                adapter.add(title);
-                                adapter.add(day); }
-                        }
-
-                        adapter.notifyDataSetChanged(); // 어댑터리스트 갱신
-                        list_view.setSelection(adapter.getCount() - 1);
-
-                    }
-
-                }.execute();
+                }
+                list_view.setAdapter(adapter); // 리스트뷰에 어뎁터 넣어서 출력
+                list_view.setSelection(adapter.getCount()-1);
 
             }
-        });*/
+        });
 
+
+
+        adapter = new MyAdapter();
+        list_view.setAdapter(adapter); // 리스트뷰에 어뎁터 넣어서 출력
+
+        matbt = (Button) findViewById(R.id.bt1);
+        matbt.setOnClickListener(new View.OnClickListener() {//onclicklistener를 연결하여 터치시 실행됨
+
+            @Override
+            public void onClick(View v) {
+
+                    new AsyncTask() {//AsyncTask객체 생성
+
+                        @SuppressLint("WrongThread")
+                        @Override
+                        protected Object doInBackground(Object[] params) {
+
+                            String url, urlnum;
+                             url = "https://search.naver.com/search.naver?where=post&sm=tab_jum&query=";  //네이버 블로그 url
+                            serch = "맛집";
+                            urlnum = "&sm=tab_pge&srchby=all&st=sim&where=post&start=";
+                            //&sm=tab_pge&srchby=all&st=sim&where=post&start=1  // 1~10, 11~20. 21~30.....
+
+                            try {
+                                doc = Jsoup.connect(url + topname + serch + urlnum + pagecnt).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
+                                contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Object o) {
+                            super.onPostExecute(o);
+
+                            for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
+                                for (int i = 1; i < 11; i++) {
+                                    String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
+                                    String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
+                                    String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
+
+                                    adapter.addItem(title, img, "등록일 : " + day);
+
+                                    blogtitle.add(title);
+                                }
+                            }
+
+                            adapter.notifyDataSetChanged(); // 어댑터 갱신
+                            list_view.setSelection(adapter.getCount()-1);
+                        }
+                    }.execute();
+
+
+
+            }
+
+        });
+
+        gobt = (Button) findViewById(R.id.bt2);
+        gobt.setOnClickListener(new View.OnClickListener() {//onclicklistener를 연결하여 터치시 실행됨
+
+            @Override
+            public void onClick(View v) {
+                for (pagecnt = 1; pagecnt <= 31; pagecnt = pagecnt + 10) { // i로 페이지값 넘기면서 값 가져오기
+
+                    new AsyncTask() {//AsyncTask객체 생성
+
+                        @SuppressLint("WrongThread")
+                        @Override
+                        protected Object doInBackground(Object[] params) {
+
+                            String url, urlnum;
+
+                            url = "https://search.naver.com/search.naver?where=post&sm=tab_jum&query=";  //네이버 블로그 url
+                            serch = "가볼 곳";
+                            urlnum = "&sm=tab_pge&srchby=all&st=sim&where=post&start=";
+                            //&sm=tab_pge&srchby=all&st=sim&where=post&start=1  // 1~10, 11~20. 21~30.....
+
+                            try {
+                                doc = Jsoup.connect(url + topname + serch + urlnum + pagecnt).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
+                                contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                        @Override
+                        protected void onPostExecute(Object o) {
+                            super.onPostExecute(o);
+
+                            for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
+                                for (int i = 1; i < 11; i++) {
+                                    String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
+                                    String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
+                                    String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
+
+                                    adapter.addItem(title, img, "등록일 : " + day);
+                                }
+                            }
+                        }
+                    }.execute();
+
+                }
+                list_view.setAdapter(adapter); // 리스트뷰에 어뎁터 넣어서 출력
+                list_view.setSelection(adapter.getCount()-1);
+            }
+        });
+
+
+        datebt = (Button) findViewById(R.id.bt3);
+        datebt.setOnClickListener(new View.OnClickListener() {//onclicklistener를 연결하여 터치시 실행됨
+
+            @Override
+            public void onClick(View v) {
+                for (pagecnt = 1; pagecnt <= 31; pagecnt = pagecnt + 10) { // i로 페이지값 넘기면서 값 가져오기
+
+                    new AsyncTask() {//AsyncTask객체 생성
+
+                        @SuppressLint("WrongThread")
+                        @Override
+                        protected Object doInBackground(Object[] params) {
+
+                            String url, urlnum;
+
+                            url = "https://search.naver.com/search.naver?where=post&sm=tab_jum&query=";  //네이버 블로그 url
+                            serch = "데이트";
+                            urlnum = "&sm=tab_pge&srchby=all&st=sim&where=post&start=";
+                            //&sm=tab_pge&srchby=all&st=sim&where=post&start=1  // 1~10, 11~20. 21~30.....
+
+                            try {
+                                doc = Jsoup.connect(url + topname + serch + urlnum + pagecnt).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
+                                contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            return null;
+                        }
+                        @Override
+                        protected void onPostExecute(Object o) {
+                            super.onPostExecute(o);
+
+                            for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
+                                for (int i = 1; i < 11; i++) {
+                                    String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
+                                    String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
+                                    String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
+
+                                    adapter.addItem(title, img, "등록일 : " + day);
+                                }
+                            }
+                        }
+                    }.execute();
+
+                }
+
+                list_view.setAdapter(adapter); // 리스트뷰에 어뎁터 넣어서 출력
+
+                list_view.setSelection(adapter.getCount()-1);
+            }
+        });
+
+
+        list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long idinlist) {
+
+                String s = blogtitle.get((int) idinlist);
+               Toast.makeText(SubActivity4.this,s,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
