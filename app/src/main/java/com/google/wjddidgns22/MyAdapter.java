@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,82 +18,94 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-public class MyAdapter extends SubActivity4 {
+public class MyAdapter extends BaseAdapter {
+
+    private ArrayList<Blog_item> Blog_item_DataList = new ArrayList<Blog_item>() ;
+    String k ;
 
     Context mContext = null;
     LayoutInflater mLayoutInflater = null;
     ArrayList<Blog_item> sample;
+
     Bitmap bitmap;
-    String k;
-    public MyAdapter(Context context, ArrayList<Blog_item> data) {
-        mContext = context;
-        sample = data;
-        mLayoutInflater = LayoutInflater.from(mContext);
+
+
+    public MyAdapter() {
     }
 
     public int getCount() {
-        return sample.size();
+        return Blog_item_DataList.size();
     }
 
     public long getItemId(int position) {
+
         return position;
     }
 
     public Blog_item getItem(int position) {
-        return sample.get(position);
+
+        return Blog_item_DataList.get(position);
     }
 
     public View getView(final int position, View converView, ViewGroup parent) {
-        View view = mLayoutInflater.inflate(R.layout.blog_item, null);
-        ImageView imageView = (ImageView) view.findViewById(R.id.blogimg);
-        TextView Name = (TextView) view.findViewById(R.id.blogtitle);
-        TextView day = (TextView) view.findViewById(R.id.blogday);
+        final Context context = parent.getContext();
+        if (converView == null){
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(context
+            .LAYOUT_INFLATER_SERVICE);
+            converView = inflater.inflate(R.layout.blog_item,parent,false);
+        }
 
+        final ImageView img = (ImageView) converView.findViewById(R.id.blogimg);
 
-        k = sample.get(position).getPoster();
+        TextView Name = (TextView) converView.findViewById(R.id.blogtitle);
+        TextView day = (TextView) converView.findViewById(R.id.blogday);
 
-        // imageView.setImageResource( sample.get(position).getPoster());
-        Name.setText(sample.get(position).getTitle());
-        day.setText(sample.get(position).getDay());
+        Blog_item blog_item = Blog_item_DataList.get(position);
+
+        k = blog_item.getPoster();
+
+        Name.setText(blog_item.getTitle());
+        day.setText(blog_item.getDay());
 
         Thread mThread = new Thread(){
-            @Override
-            public void run(){
-                try {
-                    URL url = new URL(k);
-                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-                    conn.setDoInput(true);
-                    conn.connect();
+          @Override
+          public void run(){
+              try{
+                  URL url = new URL(k);
+                  HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                  conn.setDoInput(true);
+                  conn.connect();
 
-                    InputStream is = conn.getInputStream();
-                    bitmap = BitmapFactory.decodeStream(is);
+                  InputStream is = conn.getInputStream();
+                  bitmap = BitmapFactory.decodeStream(is);
 
-
-                }
-
-
-                catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+              } catch (MalformedURLException e) {
+                  e.printStackTrace();
+              } catch (IOException e) {
+                  e.printStackTrace();
+              }
+          }
         };
         mThread.start();
-
         try {
             mThread.join();
-            imageView.setImageBitmap(bitmap);
+            img.setImageBitmap(bitmap);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-
-
-
         /////////////////
-        return view;
+        return converView;
 
+    }
 
+    public void addItem(String title , String img , String day){
+        Blog_item item = new Blog_item(title,img,day);
+
+        item.setTitle(title);
+        item.setPoster(img);
+        item.setDay(day);
+
+        Blog_item_DataList.add(item);
     }
 }
