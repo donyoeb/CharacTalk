@@ -25,13 +25,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bt2"
-            android:text="가볼곳"
+            android:text="가볼 곳"
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/bt3"
-            android:text="데이트"
+            android:text="볼 거리"
             />
 
 

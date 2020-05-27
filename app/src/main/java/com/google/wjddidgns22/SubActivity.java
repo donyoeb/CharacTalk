@@ -37,6 +37,9 @@ public class SubActivity extends AppCompatActivity {
     private ArrayList<String> Users_pass = new ArrayList<>();   //유저 저장을 위한 리스트
     private ArrayList<String> Users_lang = new ArrayList<>();   //유저 저장을 위한 리스트
     private ArrayList<String> Users_char = new ArrayList<>();   //유저 저장을 위한 리스트
+
+    private ArrayList<String> insideuser = new ArrayList<>();   //유저 저장을 위한 리스트
+
     private String user_pa;
     private String user_la;
     private String user_ch;
@@ -81,6 +84,8 @@ public class SubActivity extends AppCompatActivity {
         final double x = intent1.getExtras().getDouble("위도");
         final double y = intent1.getExtras().getDouble("경도");
         final String id = intent1.getExtras().getString("ID");
+
+
 
         ActionBar ab = getSupportActionBar() ;
         ab.setTitle("나의 닉네임 : "+ id) ;
@@ -145,9 +150,39 @@ public class SubActivity extends AppCompatActivity {
 
                                 Users[cnt]=msg;
                                 cnt++;
+                                if(result<5){
+                                    insideuser.add(msg);
+                                }
 
-                                Array.add(msg); // array에 저장
-                                adapter.add(msg); //adapter에 저장
+
+                                int flg=0;
+                                int listcnt=0;
+
+                                while(listcnt <= insideuser.size()-1){
+
+                                    if(msg.equals(insideuser.get(listcnt))){
+
+                                        if (msg.equals(id)){
+                                            flg = 1;        //내 아이디는 리스트에서 제외
+                                        }
+                                        else{
+                                            Array.add(msg+"\t(in 5m)"); // 5m 이내 사람들 따로 표시하기
+                                            adapter.add(msg+"\t(in 5m)");
+
+                                            flg=1;
+                                            break;
+
+                                        }
+
+                                    }
+                                    listcnt++;
+                                }
+
+                                if(flg==0) {  // 5m 밖의 사람들 그냥 닉네임만 저장
+                                    Array.add(msg); // array에 저장
+                                    adapter.add(msg); //adapter에 저장
+                                }
+
 
                             }
                         }
@@ -237,7 +272,7 @@ public class SubActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long idinlist) {
 
-                String s = Users[(int)idinlist];
+                String s = Users[position+1]; // 내닉네임 빼고 +1 부터
 
                 for (int i=0;i<Users_nick.size();i++){
 

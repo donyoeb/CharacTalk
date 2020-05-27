@@ -78,10 +78,10 @@ public class MainActivity extends AppCompatActivity
     private String markerTitle; // 내 닉네임
     private String markerSnippet; //내 위치 한글화버전
 
-    private int cnt=0;
 
     private int markerflag;
     private String mycharacter;
+
 
     private ArrayList<String> Users = new ArrayList<>();   //유저 저장을 위한 리스트
     private ArrayList<String> Usersch = new ArrayList<>();
@@ -242,6 +242,7 @@ public class MainActivity extends AppCompatActivity
         buttonmap2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Users.clear();
                 usersk.clear();
                 usersw.clear();
@@ -275,20 +276,16 @@ public class MainActivity extends AppCompatActivity
                                 String usernickname = i.getKey();
                                 // 데이터베이스에서 "위치"의 key 가져오기 (ex 상명대위치)
 
-                                if (result > 5) { //2m 반경 이상인 유저 정보만 배열에 저장
+                                if (result > 5) { //5m 반경 이상인 유저 정보만 배열에 저장
                                     Usersch.add(user_ch);
                                     Users.add(usernickname);
                                     usersk.add(tmpk);
                                     usersw.add(tmpw);
-                                 //   cnt++;
-                                    //내 위치 제외하고 저장하기
-                                }
+
+
+                                 }
                                 //주변 반경 사람들 카운트해서 배열에 저장함
 
-                                else{
-                                    //5미터 반경 안의 사람들 처리
-
-                                }
 
                             }
 
@@ -300,6 +297,8 @@ public class MainActivity extends AppCompatActivity
 
                     }
                 });
+
+
 
             }
         });
@@ -393,7 +392,7 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        buttonmap6 = (Button) findViewById(R.id.buttonmap6); //탑 클릭이벤트 버튼
+        buttonmap6 = (Button) findViewById(R.id.buttonmap6); //번역버튼 클릭이벤트 버튼
         buttonmap6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -403,6 +402,9 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent4); // 액티비티를 시작해보아요!
             }
         });
+
+
+
 
     }
     @Override
@@ -693,12 +695,12 @@ public class MainActivity extends AppCompatActivity
         mMoveMapByUser = false;
 
 
-
         mGoogleMap.setOnMarkerClickListener(markerClickListener);   // 마커클릭 리스너
 
 
 
-        if (currentMarker != null) currentMarker.remove();
+        if (currentMarker != null) currentMarker.remove();   //마커 중복 출력 지우기
+
 
 
 
@@ -706,7 +708,7 @@ public class MainActivity extends AppCompatActivity
 
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());  //currentlatlng = 현재위도경도값
 
-        MarkerOptions markerOptions = new MarkerOptions();               //현재 내위치 마커 띄우기
+        MarkerOptions markerOptions = new MarkerOptions();               //현재  마커 띄우기
         markerOptions.position(currentLatLng);
         markerOptions.title(markerTitle);  //markertitle = 닉네임
         markerOptions.snippet(markerSnippet);  //markersnippet = 특징
@@ -747,41 +749,7 @@ public class MainActivity extends AppCompatActivity
         currentMarker = mGoogleMap.addMarker(markerOptions);
 
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   오벨리스크 마커
-
-
-
-
-        int topsize = topnameList.size();              //내 위치값 기준으로 주변의 오벨리스크 마커 띄우기
-        for(int i = 0; i<topsize ; i++){
-            double a,b;
-            a = topwList.get(i);
-            b = topkList.get(i);
-
-            double result = CoordDistance(x, y, a, b);//반경구하는식
-            //x,y는 나의 위도경도 , tmpw,tmpk는 데이터베이스 안의 모든 아이디들의 각각의 위도경도
-
-            result = result * 1609.344; //마일을 미터로 계산
-            result = Math.round((result * 1000) / 1000.0); // 반경소수점자리 반올림
-
-            if (result < 300) {   //내 위치에서의 반경내의 데이터 출력
-                //탑은 반경 300미터안에 있으면 보이는걸로 반경
-                MarkerOptions markerOptions2 = new MarkerOptions();
-                LatLng hi = new LatLng(a,b);
-                markerOptions2.position(hi);
-                markerOptions2.title(topstateList.get(i));
-                markerOptions2.snippet(topnameList.get(i));
-                markerOptions2.icon(BitmapDescriptorFactory.fromResource(R.drawable.top));
-                mGoogleMap.addMarker(markerOptions2);
-
-            }
-
-
-        }
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   유저 마커
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         for(int i = 0; i<Users.size() ; i++){  //주변사람 위치값을 기준으로 마커 띄우기
             double a,b;
@@ -812,13 +780,47 @@ public class MainActivity extends AppCompatActivity
                 return;
             }
 
-            mGoogleMap.addMarker(markerOptions1);
+
+             mGoogleMap.addMarker(markerOptions1);
 
 
 
         }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   오벨리스크 마커
+
+
+
+
+        int topsize = topnameList.size();              //내 위치값 기준으로 주변의 오벨리스크 마커 띄우기
+        for(int i = 0; i<topsize ; i++){
+            double a,b;
+            a = topwList.get(i);
+            b = topkList.get(i);
+
+            double result = CoordDistance(x, y, a, b);//반경구하는식
+            //x,y는 나의 위도경도 , tmpw,tmpk는 데이터베이스 안의 모든 아이디들의 각각의 위도경도
+
+            result = result * 1609.344; //마일을 미터로 계산
+            result = Math.round((result * 1000) / 1000.0); // 반경소수점자리 반올림
+
+            if (result < 200) {   //내 위치에서의 반경내의 데이터 출력
+                //탑은 반경 200미터안에 있으면 보이는걸로 반경
+                MarkerOptions markerOptions2 = new MarkerOptions();
+                LatLng hi = new LatLng(a,b);
+                markerOptions2.position(hi);
+                markerOptions2.title(topstateList.get(i));
+                markerOptions2.snippet(topnameList.get(i));
+                markerOptions2.icon(BitmapDescriptorFactory.fromResource(R.drawable.top));
+                mGoogleMap.addMarker(markerOptions2);
+
+            }
+
+
+        }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   유저 마커
 
         if ( mMoveMapByAPI ) {
 
@@ -928,6 +930,8 @@ public class MainActivity extends AppCompatActivity
             Users_nick.clear();
             Users_char.clear();
             Users_lang.clear();
+            Users.clear();
+
             return false;
         }
     };
