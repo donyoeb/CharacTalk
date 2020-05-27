@@ -73,11 +73,11 @@ public class SubActivity2 extends AppCompatActivity{
         result_lang = (Spinner)findViewById(R.id.result_lang);
 
         Intent intent2 = getIntent();
-         id = intent2.getExtras().getString("ID");
+        id = intent2.getExtras().getString("ID");
         final int cnt = intent2.getExtras().getInt("카운트");
         final int inar = intent2.getExtras().getInt("주변");
 
-         arround = Integer.toString(inar);
+        arround = Integer.toString(inar);
 
 
         ActionBar ab = getSupportActionBar() ;
@@ -316,7 +316,7 @@ public class SubActivity2 extends AppCompatActivity{
 
             //번역결과를 결과 텍스트뷰에 넣는다.
 
-            databaseReference.child("message").child(arround).push().setValue(id + " : "+items.getTranslatedText());
+            databaseReference.child("message").child(arround).push().setValue(id + " : "+items.getTranslatedText()); //데이터베이스에 추가
 
         }
 

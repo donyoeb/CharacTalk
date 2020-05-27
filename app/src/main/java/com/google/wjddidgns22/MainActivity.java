@@ -392,7 +392,7 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        buttonmap6 = (Button) findViewById(R.id.buttonmap6); //번역버튼 클릭이벤트 버튼
+       /* buttonmap6 = (Button) findViewById(R.id.buttonmap6); //번역버튼 클릭이벤트 버튼
         buttonmap6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -402,7 +402,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(intent4); // 액티비티를 시작해보아요!
             }
         });
-
+*/
 
 
 

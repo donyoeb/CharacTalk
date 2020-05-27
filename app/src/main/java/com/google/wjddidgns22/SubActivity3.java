@@ -87,22 +87,22 @@ public class SubActivity3 extends AppCompatActivity{
         flag = fl;
         mynickname = mynick;
         usernickname = usernick;
-       if (flag.equals("0")){
+        if (flag.equals("0")){
 
-           ActionBar ab = getSupportActionBar() ;
-           ab.setTitle(usernickname+" 와의 대화방");
+            ActionBar ab = getSupportActionBar() ;
+            ab.setTitle(usernickname+" 와의 대화방");
         }
-       else if (flag.equals("2")){
+        else if (flag.equals("2")){
 
-           ActionBar ab = getSupportActionBar() ;
-           ab.setTitle(usernickname+" 와의 대화방");
-       }
-       else{
+            ActionBar ab = getSupportActionBar() ;
+            ab.setTitle(usernickname+" 와의 대화방");
+        }
+        else{
 
-           ActionBar ab = getSupportActionBar() ;
-           ab.setTitle("입장한 채팅방 : "+usernickname);
+            ActionBar ab = getSupportActionBar() ;
+            ab.setTitle("입장한 채팅방 : "+usernickname);
 
-       }
+        }
 
         initDatabase();
 
@@ -198,12 +198,12 @@ public class SubActivity3 extends AppCompatActivity{
                 if(flag.equals("0")){
                     for (DataSnapshot messageData : dataSnapshot.child(usernickname).child(mynick).getChildren()) {
 
-                    // child 내에 있는 데이터만큼 반복합니다.
+                        // child 내에 있는 데이터만큼 반복합니다.
 
                         String msg2 = messageData.getValue().toString();
                         Array.add(msg2);
-                         adapter.add(msg2);
-                     }
+                        adapter.add(msg2);
+                    }
                 }
                 else if (flag.equals("2")) {
                     for (DataSnapshot messageData : dataSnapshot.child(mynickname).child(usernickname).getChildren()) {
@@ -358,7 +358,7 @@ public class SubActivity3 extends AppCompatActivity{
             //안드로이드 객체에 담기
             SubActivity3.NaverTranslateTask.TranslatedItem items = gson.fromJson(rootObj.toString(), SubActivity3.NaverTranslateTask.TranslatedItem.class);
 
-            if (flag.equals("0")) {
+            if (flag.equals("0")) {   //데이터베이스에 추가
                 databaseReference.child("message").child(usernickname).child(mynick).push().setValue(mynick + " : " + items.getTranslatedText());
             } else if (flag.equals("2")) {
                 databaseReference.child("message").child(mynickname).child(usernickname).push().setValue(mynick + " : " + items.getTranslatedText());
