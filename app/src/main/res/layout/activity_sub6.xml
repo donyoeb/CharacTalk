@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/userimg"
         android:layout_width="match_parent"
-        android:layout_height="291dp" />
+        android:layout_height="393dp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -18,14 +18,16 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
             android:fontFamily="@font/mainfont"
             android:text="유저 닉네임 : "/>
 
         <TextView
             android:id="@+id/user_nickname"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
             android:fontFamily="@font/mainfont"/>
 
     </LinearLayout>
@@ -38,14 +40,16 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
             android:text="현재 위치 : "
             android:fontFamily="@font/mainfont"/>
 
         <TextView
             android:id="@+id/user_now"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
             android:fontFamily="@font/mainfont"/>
 
     </LinearLayout>
@@ -57,14 +61,16 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
             android:text="사용중인 캐릭터 : "
             android:fontFamily="@font/mainfont"/>
 
         <TextView
             android:id="@+id/user_char"
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
             android:fontFamily="@font/mainfont"/>
 
     </LinearLayout>
@@ -79,13 +85,15 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
             android:text="현재 비밀번호  : "
             android:fontFamily="@font/mainfont"/>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="25dp"
+            android:layout_height="40dp"
+            android:textSize="20dp"
             android:id="@+id/now_pass"
             android:fontFamily="@font/mainfont"/>
     </LinearLayout>
@@ -101,13 +109,15 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
+        android:textSize="20dp"
         android:text="사용가능 언어 : "
         android:fontFamily="@font/mainfont"/>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="40dp"
+        android:textSize="20dp"
         android:id="@+id/now_lang"
         android:fontFamily="@font/mainfont" />
     </LinearLayout>
@@ -129,7 +139,8 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="40dp"
+                android:textSize="20dp"
                 android:text="비밀번호 변경  : "
                 android:fontFamily="@font/mainfont"/>
 
@@ -143,7 +154,7 @@
                 android:id="@+id/change_pass"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginLeft="27dp"
+                android:layout_marginLeft="0dp"
                 android:text="비번 변경"
                 android:textSize="20dp"
                 android:fontFamily="@font/mainfont"
@@ -159,8 +170,9 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="사용가능 언어 변경 : "
+                android:layout_height="40dp"
+                android:textSize="20dp"
+                android:text="언어 변경 : "
                 android:fontFamily="@font/mainfont"/>
 
 
@@ -169,15 +181,16 @@
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/mainfont"/>
+
             <Button
                 android:id="@+id/change_lang"
-                android:text="언어 변경"
-                android:textSize="20dp"
-                android:fontFamily="@font/mainfont"
-                android:layout_marginLeft="11dp"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:background="@drawable/button"/>
+                android:layout_marginLeft="0dp"
+                android:background="@drawable/button"
+                android:fontFamily="@font/mainfont"
+                android:text="언어 변경"
+                android:textSize="20dp" />
 
         </LinearLayout>
 

@@ -81,7 +81,7 @@ public class SubActivity2 extends AppCompatActivity{
 
 
         ActionBar ab = getSupportActionBar() ;
-        ab.setTitle("주변 채팅방 ("+cnt +"명 참가 중)") ;
+        ab.setTitle("주변과의 채팅 ("+cnt +"명 참가 중)") ;
 
         //1 = 한국   / 2= 영어  / 3= 일본어 / 4= 중국어
         insert_lang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

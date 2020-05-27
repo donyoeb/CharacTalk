@@ -18,7 +18,9 @@
     </string-array>
 
     <string-array name="캐릭터">
-        <item>라이언</item>
+
+        <item>라이언
+        </item>
         <item>무지</item>
         <item>튜브</item>
 

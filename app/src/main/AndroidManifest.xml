@@ -7,31 +7,36 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/marker1"
+        android:icon="@drawable/appimg"
         android:label="캐릭톡"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main2Activity">
+        <activity android:name=".loading">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Main2Activity"
+
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            />
         <activity android:name=".SubActivity" />
         <activity android:name=".SubActivity2" />
         <activity android:name=".SubActivity3" />
         <activity android:name=".SubActivity4" />
-        <activity android:name=".SubActivity5"
-            android:theme="@style/popupTheme"
+        <activity
+            android:name=".SubActivity5"
             android:screenOrientation="portrait"
+            android:theme="@style/popupTheme"
             tools:ignore="LockedOrientationActivity" />
         <activity android:name=".SubActivity6" />
-        <activity android:name=".SubActivity7"/>
-        <activity android:name=".SubActivity8"/>
-
+        <activity android:name=".SubActivity7" />
+        <activity android:name=".SubActivity8" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

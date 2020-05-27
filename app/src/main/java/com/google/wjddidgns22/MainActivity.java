@@ -898,8 +898,8 @@ public class MainActivity extends AppCompatActivity
 
                 }
                 else{
-                    Toast.makeText(MainActivity.this,"                                ★ 오류 ★\n1. 우측의 해당하는 '클릭 전 누르기' 버튼을 눌러주세요." +
-                            "\n2. 본인 캐릭터의 정보는 내정보 버튼을 통해 이용해주세요."  ,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"                                ★ 오류 ★\n1. 상황에 맞는 '갱신' 버튼을 눌러주세요." +
+                            "\n2. 본인 캐릭터의 정보는 내정보 버튼을 통해 확인해주세요."  ,Toast.LENGTH_SHORT).show();
 
                 }
 
