@@ -116,37 +116,20 @@ public class SubActivity extends AppCompatActivity {
                             double tmpw = Double.parseDouble(userw);  //위도를 double화
                             double tmpk = Double.parseDouble(userk);  //경도를 double화
 
-
                             double result = CoordDistance(x,y,tmpw,tmpk);//반경구하는식
                             //x,y는 나의 위도경도 , tmpw,tmpk는 데이터베이스 안의 모든 아이디들의 각각의 위도경도
                             result = result*1609.344; //마일을 미터로 계산
                             result = Math.round((result*1000)/1000.0); // 반경소수점자리 반올림
 
-
-                            /*캐릭터 넣을때..
-                                반경 1~10? 까지는 리스트로 보여주고...
-                                그밖에 캐릭터로 표시되는거는 캐릭터로 보여주고...
-                             */
-
-
                             if (result<150) {   //내 위치에서의 반경내의 데이터 출력
                                 //100m 반경  ,오차범위까지 +50 정도 더 해주기
-                                    // children 내에 있는 데이터만큼 반복합니다.
-                                String msg = i.getKey();
-                                    // 데이터베이스에서 "위치"의 key 가져오기 (ex 상명대위치)
+                                String msg = i.getKey(); // 데이터베이스에서 "위치"의 key 가져오기 (유저 닉네임)
 
                                 tmpk = tmpk*100;
                                 tmpw = tmpw*100;
                                 int k = (int)tmpk;
                                 int w = (int)tmpw;
-                                inaround = inaround+k+w;
-
-                                /*이렇게 하면
-                                새로운 사람이 추가되면 그 값이 증가해서
-                                다른채팅방이 생겨남*/
-                                /*근데 어차피 새로 들어오는 사람이 생기면 기존 유저들도
-                                업데이트되는 정보 갱신차 버튼을 누르면 새로운 값으로 된 대화방에서 시작가능
-                                 */
+                                inaround = inaround+k+w;  //주변사람들과의 대화를 위해 저장
 
                                 Users[cnt]=msg;
                                 cnt++;

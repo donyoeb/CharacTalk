@@ -31,7 +31,7 @@ public class SubActivity4 extends AppCompatActivity {
     private String picksearch; //  블로그 선택
     private String resultsearch; //
 
-    private int[] pagecnt = {1,11,21};
+    private int[] pagecnt = {1,11,21,31,41};
 
 
     public EditText editText; //검색할 edittex
@@ -95,9 +95,25 @@ public class SubActivity4 extends AppCompatActivity {
                         //&sm=tab_pge&srchby=all&st=sim&where=post&start=1  // 1~10, 11~20. 21~30.....
 
                         try {
+                            for (int k = 0;k<5;k++){ // 블로그 5페이지까지 가져오기 총 50개
+                                doc= Jsoup.connect(url + topname + search + urlnum + pagecnt[k]).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
+                                contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+                                for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
+                                    for (int i = 1; i < 11; i++) {
+                                        String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
+                                        String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
+                                        String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
+                                        String contents_url = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a").attr("href");
 
-                            doc= Jsoup.connect(url + topname + search + urlnum + pagecnt[0]).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
-                            contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+
+                                        adapter.addItem(title, img, "등록일 : " + day);
+
+                                        blogtitle.add(title);
+                                        blogurl.add(contents_url);
+                                    }
+                                }
+
+                            }
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -108,21 +124,6 @@ public class SubActivity4 extends AppCompatActivity {
                     @Override
                     protected void onPostExecute(Object o) {
                         super.onPostExecute(o);
-
-                        for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
-                            for (int i = 1; i < 11; i++) {
-                                String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
-                                String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
-                                String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
-                                String url = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a").attr("href");
-
-
-                                adapter.addItem(title, img, "등록일 : " + day);
-
-                                blogtitle.add(title);
-                                blogurl.add(url);
-                            }
-                        }
 
 
                         adapter.notifyDataSetChanged(); // 어댑터 갱신
@@ -159,9 +160,25 @@ public class SubActivity4 extends AppCompatActivity {
                                 //&sm=tab_pge&srchby=all&st=sim&where=post&start=1  // 1~10, 11~20. 21~30.....
 
                                 try {
+                                    for (int k = 0;k<5;k++){ // 블로그 5페이지까지 가져오기 총 50개
+                                        doc= Jsoup.connect(url + topname + search + urlnum + pagecnt[k]).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
+                                        contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+                                        for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
+                                            for (int i = 1; i < 11; i++) {
+                                                String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
+                                                String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
+                                                String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
+                                                String contents_url = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a").attr("href");
 
-                                    doc= Jsoup.connect(url + topname + search + urlnum + pagecnt[0]).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
-                                    contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+
+                                                adapter.addItem(title, img, "등록일 : " + day);
+
+                                                blogtitle.add(title);
+                                                blogurl.add(contents_url);
+                                            }
+                                        }
+
+                                    }
 
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -172,21 +189,6 @@ public class SubActivity4 extends AppCompatActivity {
                             @Override
                             protected void onPostExecute(Object o) {
                                 super.onPostExecute(o);
-
-                                for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
-                                    for (int i = 1; i < 11; i++) {
-                                        String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
-                                        String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
-                                        String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
-                                        String url = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a").attr("href");
-
-
-                                        adapter.addItem(title, img, "등록일 : " + day);
-
-                                        blogtitle.add(title);
-                                        blogurl.add(url);
-                                    }
-                                }
 
 
                                 adapter.notifyDataSetChanged(); // 어댑터 갱신
@@ -222,9 +224,25 @@ public class SubActivity4 extends AppCompatActivity {
                         //&sm=tab_pge&srchby=all&st=sim&where=post&start=1  // 1~10, 11~20. 21~30.....
 
                         try {
+                            for (int k = 0;k<5;k++){ // 블로그 5페이지까지 가져오기 총 50개
+                                doc= Jsoup.connect(url + topname + search + urlnum + pagecnt[k]).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
+                                contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+                                for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
+                                    for (int i = 1; i < 11; i++) {
+                                        String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
+                                        String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
+                                        String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
+                                        String contents_url = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a").attr("href");
 
-                            doc= Jsoup.connect(url + topname + search + urlnum + pagecnt[0]).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
-                            contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+
+                                        adapter.addItem(title, img, "등록일 : " + day);
+
+                                        blogtitle.add(title);
+                                        blogurl.add(contents_url);
+                                    }
+                                }
+
+                            }
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -235,21 +253,6 @@ public class SubActivity4 extends AppCompatActivity {
                     @Override
                     protected void onPostExecute(Object o) {
                         super.onPostExecute(o);
-
-                        for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
-                            for (int i = 1; i < 11; i++) {
-                                String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
-                                String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
-                                String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
-                                String url = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a").attr("href");
-
-
-                                adapter.addItem(title, img, "등록일 : " + day);
-
-                                blogtitle.add(title);
-                                blogurl.add(url);
-                            }
-                        }
 
 
                         adapter.notifyDataSetChanged(); // 어댑터 갱신
@@ -283,11 +286,26 @@ public class SubActivity4 extends AppCompatActivity {
                         search = "볼거리";
                         urlnum = "&sm=tab_pge&srchby=all&st=sim&where=post&start=";
                         //&sm=tab_pge&srchby=all&st=sim&where=post&start=1  // 1~10, 11~20. 21~30.....
-
                         try {
+                            for (int k = 0;k<5;k++){   // 블로그 5페이지까지 가져오기 총 50개
+                                doc= Jsoup.connect(url + topname + search + urlnum + pagecnt[k]).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
+                                contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+                                for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
+                                    for (int i = 1; i < 11; i++) {
+                                        String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
+                                        String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
+                                        String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
+                                        String contents_url = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a").attr("href");
 
-                            doc= Jsoup.connect(url + topname + search + urlnum + pagecnt[0]).get(); //url + 탑이름 + 검색단어로 페이지를 불러옴
-                            contents = doc.select("div[class=blog section _blogBase _prs_blg]");
+
+                                        adapter.addItem(title, img, "등록일 : " + day);
+
+                                        blogtitle.add(title);
+                                        blogurl.add(contents_url);
+                                    }
+                                }
+
+                            }
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -298,21 +316,6 @@ public class SubActivity4 extends AppCompatActivity {
                     @Override
                     protected void onPostExecute(Object o) {
                         super.onPostExecute(o);
-
-                        for (Element elem : contents) {//li[id=sp_blog_1~10]  블로그 1번~10번 저장
-                            for (int i = 1; i < 11; i++) {
-                                String img = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a img").attr("src");
-                                String title = elem.select("li[id=sp_blog_" + i + "]").select("a[title]").text();
-                                String day = elem.select("li[id=sp_blog_" + i + "]").select("dd[class=txt_inline]").text();
-                                String url = elem.select("li[id=sp_blog_" + i + "]").select("div[class=thumb thumb-rollover] a").attr("href");
-
-
-                                adapter.addItem(title, img, "등록일 : " + day);
-
-                                blogtitle.add(title);
-                                blogurl.add(url);
-                            }
-                        }
 
 
                         adapter.notifyDataSetChanged(); // 어댑터 갱신

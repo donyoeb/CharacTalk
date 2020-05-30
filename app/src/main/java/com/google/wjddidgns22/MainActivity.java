@@ -147,21 +147,22 @@ public class MainActivity extends AppCompatActivity
 
 ///////////////////////////////////////////////////////////////////////////////////////   오벨리스크 위치값 입력
 
+        {
+            topstateList.add("top");
+            topnameList.add("상명대 천안");
+            topwList.add(36.832912871889924);
+            topkList.add(127.17812262475492);
 
-        topstateList.add("top");
-        topnameList.add("상명대천안");
-        topwList.add(36.832912871889924);
-        topkList.add(127.17812262475492);
+            topstateList.add("top");
+            topnameList.add("천안 안서동");
+            topwList.add(36.830874);
+            topkList.add(127.177122);
 
-        topstateList.add("top");
-        topnameList.add("안서동");
-        topwList.add(36.830874);
-        topkList.add(127.177122);
-
-        topstateList.add("top");
-        topnameList.add("야우리");
-        topwList.add(36.819307);
-        topkList.add(127.15523);
+            topstateList.add("top");
+            topnameList.add("천안 야우리");
+            topwList.add(36.819307);
+            topkList.add(127.15523);
+        }
 
 
 
@@ -693,16 +694,8 @@ public class MainActivity extends AppCompatActivity
     public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
 
         mMoveMapByUser = false;
-
-
         mGoogleMap.setOnMarkerClickListener(markerClickListener);   // 마커클릭 리스너
-
-
-
         if (currentMarker != null) currentMarker.remove();   //마커 중복 출력 지우기
-
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 내위치 마커
 
@@ -720,7 +713,7 @@ public class MainActivity extends AppCompatActivity
         // .fillColor(Color.parseColor("#E0F8F7")); //배경색
 
         //원추가
-        this.mGoogleMap.addCircle(circle);                    //<<<<<<<<<<<<<<<<원이 중복으로 출력되는 문제 발생
+        this.mGoogleMap.addCircle(circle);                    //<<<<<<<<<<<<<<<<원이 중복으로 출력되는 문제 발생 -> clear로 해결
 
         databaseReference.child("유저").child(nicknames).child("캐릭터").setValue(mycharacter);
         databaseReference.child("유저").child(nicknames).child("비밀번호").setValue(password);
@@ -728,7 +721,6 @@ public class MainActivity extends AppCompatActivity
         databaseReference.child("유저").child(nicknames).child("위치").child("위도").setValue(x);
         databaseReference.child("유저").child(nicknames).child("위치").child("경도").setValue(y);
 //캐릭터 생성하면서 입력된 값 자동으로 데이터베이스에 입력 , 위치값 계속 초기화
-
 
         if (mycharacter.equals("라이언")){
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker1));
@@ -898,7 +890,7 @@ public class MainActivity extends AppCompatActivity
 
                 }
                 else{
-                    Toast.makeText(MainActivity.this,"                                ★ 오류 ★\n1. 상황에 맞는 '갱신' 버튼을 눌러주세요." +
+                    Toast.makeText(MainActivity.this,"                                ★ 오류 ★\n1. 선택에 맞는 '갱신' 버튼을 눌러주세요." +
                             "\n2. 본인 캐릭터의 정보는 내정보 버튼을 통해 확인해주세요."  ,Toast.LENGTH_SHORT).show();
 
                 }
@@ -918,8 +910,8 @@ public class MainActivity extends AppCompatActivity
                     startActivity(intent5); // 액티비티를 시작해보아요!
                 }
                 else{
-                    Toast.makeText(MainActivity.this,"                                ★ 오류 ★\n1. 우측의 해당하는 '클릭 전 누르기' 버튼을 눌러주세요." +
-                            "\n2. 본인 캐릭터는 내정보 버튼을 통해 이용해주세요.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"                                ★ 오류 ★\n1. 선택에 맞는 '갱신' 버튼을 눌러주세요." +
+                            "\n2. 본인 캐릭터의 정보는 내정보 버튼을 통해 확인해주세요.",Toast.LENGTH_SHORT).show();
                 }
 
             }

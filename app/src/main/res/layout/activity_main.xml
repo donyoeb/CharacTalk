@@ -134,6 +134,17 @@
             android:text="채팅"
             android:textSize="20dp"/>
 
+        <Button
+            android:id="@+id/buttonmap2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#C1AEEE"
+            android:drawableTop="@drawable/ic_search"
+            android:fontFamily="@font/mainfont"
+            android:textColor="#FFFFFF"
+            android:text="캐릭터탐색"
+            android:textSize="20dp"/>
 
         <Button
             android:id="@+id/buttonmap5"
@@ -159,17 +170,6 @@
             android:text="번역" />
             -->
 
-        <Button
-            android:id="@+id/buttonmap2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#C1AEEE"
-            android:drawableTop="@drawable/ic_search"
-            android:fontFamily="@font/mainfont"
-            android:textColor="#FFFFFF"
-            android:text="캐릭터탐색"
-            android:textSize="20dp"/>
 
         <Button
             android:id="@+id/buttonmap3"
