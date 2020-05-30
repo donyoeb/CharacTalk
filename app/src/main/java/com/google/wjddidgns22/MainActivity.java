@@ -114,13 +114,16 @@ public class MainActivity extends AppCompatActivity
 
     private GoogleApiClient mGoogleApiClient = null;
     private GoogleMap mGoogleMap = null;
+
     private Marker currentMarker = null;
+
+
 
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2002;
-    private static final int UPDATE_INTERVAL_MS = 1000;  // 1초 마다 업데이트
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
+    private static final int UPDATE_INTERVAL_MS = 2000;  // 1초 마다 업데이트
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 1000; // 0.5초
 
     private AppCompatActivity mActivity;
     boolean askPermissionOnceAgain = false;
@@ -694,8 +697,10 @@ public class MainActivity extends AppCompatActivity
     public void setCurrentLocation(Location location, String markerTitle, String markerSnippet) {
 
         mMoveMapByUser = false;
+
         mGoogleMap.setOnMarkerClickListener(markerClickListener);   // 마커클릭 리스너
         if (currentMarker != null) currentMarker.remove();   //마커 중복 출력 지우기
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 내위치 마커
 
@@ -741,7 +746,8 @@ public class MainActivity extends AppCompatActivity
         currentMarker = mGoogleMap.addMarker(markerOptions);
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 주변캐릭터 마커
+
 
         for(int i = 0; i<Users.size() ; i++){  //주변사람 위치값을 기준으로 마커 띄우기
             double a,b;
@@ -749,6 +755,8 @@ public class MainActivity extends AppCompatActivity
             b = usersk.get(i);
             //int flag = 0 ;
             MarkerOptions markerOptions1 = new MarkerOptions();
+
+
             LatLng user = new LatLng(a,b);
 
             String usernickname = Users.get(i);
@@ -773,13 +781,17 @@ public class MainActivity extends AppCompatActivity
             }
 
 
-             mGoogleMap.addMarker(markerOptions1);
-
-
+           mGoogleMap.addMarker(markerOptions1);
 
         }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   오벨리스크 마커
+        Users.clear();
+        Usersch.clear();
+        usersk.clear();
+        usersw.clear();
+        // 주변사람 마커 계속해서 찍히는 현상 제거
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  오벨리스크 마커
 
 
 
@@ -822,6 +834,9 @@ public class MainActivity extends AppCompatActivity
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
             mGoogleMap.moveCamera(cameraUpdate);
         }
+
+
+
     }
 
 
