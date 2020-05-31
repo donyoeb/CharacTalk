@@ -36,7 +36,7 @@ import java.util.List;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SubActivity2 extends AppCompatActivity{
+public class SubActivity2 extends AppCompatActivity{  //주변과의 채팅
 
     private Button sendbt;
     private EditText editdt;
@@ -83,7 +83,7 @@ public class SubActivity2 extends AppCompatActivity{
         ActionBar ab = getSupportActionBar() ;
         ab.setTitle("주변과의 채팅 ("+cnt +"명 참가 중)") ;
 
-        //1 = 한국   / 2= 영어  / 3= 일본어 / 4= 중국어
+//1 = 한국   / 2= 영어  / 3= 일본어 / 4= 중국어
         insert_lang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -141,31 +141,39 @@ public class SubActivity2 extends AppCompatActivity{
         sendbt.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 // 버튼 누르면 수행 할 명령
+                String k = editdt.getText().toString();
+
 
                 //소스에 입력된 내용이 있는지 체크
-                if(editdt.getText().toString().length() == 0) {
+                if(k.length() == 0) {
                     Toast.makeText(SubActivity2.this, "번역할 내용을 입력하세요.", Toast.LENGTH_SHORT).show();
                     editdt.requestFocus();
                     return;
                 }
 
-                Toast.makeText(SubActivity2.this,sourcelang1 +"  ->  "+ targetlang1,Toast.LENGTH_SHORT).show();
 
-/*
-                if(sourcelang1 ==targetlang1){
-                    Toast.makeText(SubActivity2.this,"서로 다른 언어를 입력해주세요.",Toast.LENGTH_SHORT).show();
+                if (sourcelang1.equals(targetlang1)){
+                    msg = k;
 
-                    return;
-                }*/
-                //실행버튼을 클릭하면 AsyncTask를 이용 요청하고 결과를 반환받아서 화면에 표시
-                SubActivity2.NaverTranslateTask asyncTask = new SubActivity2.NaverTranslateTask();
+                    databaseReference.child("message").child(arround).push().setValue(id + " : "+msg);
+                    editdt.setText("");
 
-                msg = editdt.getText().toString(); // 에딧텍스트 내용 가져오기
-                asyncTask.execute(msg);
+                }
+                else{
+                    //실행버튼을 클릭하면 AsyncTask를 이용 요청하고 결과를 반환받아서 화면에 표시
+                    SubActivity2.NaverTranslateTask asyncTask = new SubActivity2.NaverTranslateTask();
+
+                    msg = k; // 에딧텍스트 내용 가져오기
+                    asyncTask.execute(msg);
+
+                    editdt.setText("");
+                    Toast.makeText(SubActivity2.this,sourcelang1 +"  ->  "+ targetlang1,Toast.LENGTH_SHORT).show();
+
+
+                }
 
 
 
-                editdt.setText("");
             }
         });
 

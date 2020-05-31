@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SubActivity7 extends AppCompatActivity {
 
-    private Button btTranslate;
+    private Button btTranslate;                         //번역기능
     private EditText etSource;
     private TextView tvResult;
 

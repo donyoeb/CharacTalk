@@ -35,7 +35,7 @@ import java.util.List;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SubActivity3 extends AppCompatActivity{
+public class SubActivity3 extends AppCompatActivity{  //1:1 대화 및 메시지함
 
     private Button sendbt;
     private EditText editdt;
@@ -163,30 +163,46 @@ public class SubActivity3 extends AppCompatActivity{
             public void onClick(View v) {
 
 
+                String k = editdt.getText().toString();
+
+
                 //소스에 입력된 내용이 있는지 체크
-                if(editdt.getText().toString().length() == 0) {
+                if(k.length() == 0) {
                     Toast.makeText(SubActivity3.this, "번역할 내용을 입력하세요.", Toast.LENGTH_SHORT).show();
                     editdt.requestFocus();
                     return;
                 }
 
-                Toast.makeText(SubActivity3.this,sourcelang1 +"  ->  "+ targetlang1,Toast.LENGTH_SHORT).show();
 
+                if (sourcelang1.equals(targetlang1)){
+                    msg = k;
 
-                /*if(sourcelang1 ==targetlang1){
-                    Toast.makeText(SubActivity3.this,"서로 다른 언어를 입력해주세요.",Toast.LENGTH_SHORT).show();
+                    if (flag.equals("0")) {   //데이터베이스에 추가
+                        databaseReference.child("message").child(usernickname).child(mynick).push().setValue(mynick + " : " +
+                                msg);
+                    } else if (flag.equals("2")) {
+                        databaseReference.child("message").child(mynickname).child(usernickname).push().setValue(mynick + " : " +
+                                msg);
+                    } else {
+                        databaseReference.child("message").child(usernickname).child("검색해서들어온채팅방").push().setValue(mynick + " : " +
+                                msg);
+                    }
 
-                    return;
+                    editdt.setText("");
+
                 }
+                else{
+                    //실행버튼을 클릭하면 AsyncTask를 이용 요청하고 결과를 반환받아서 화면에 표시
+                    SubActivity3.NaverTranslateTask asyncTask = new SubActivity3.NaverTranslateTask();
 
-                 */
-                //실행버튼을 클릭하면 AsyncTask를 이용 요청하고 결과를 반환받아서 화면에 표시
-                SubActivity3.NaverTranslateTask asyncTask = new SubActivity3.NaverTranslateTask();
+                    msg = k; // 에딧텍스트 내용 가져오기
+                    asyncTask.execute(msg);
 
-                msg = editdt.getText().toString(); // 에딧텍스트 내용 가져오기
-                asyncTask.execute(msg);
+                    editdt.setText("");
+                    Toast.makeText(SubActivity3.this,sourcelang1 +"  ->  "+ targetlang1,Toast.LENGTH_SHORT).show();
 
-                editdt.setText("");
+
+                }
             }
         });
 

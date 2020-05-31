@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-public class SubActivity4 extends AppCompatActivity {
+public class SubActivity4 extends AppCompatActivity { //오벨리스크
 
     private ArrayList<String> blogtitle = new ArrayList<>();   // 저장을 위한 리스트
     private ArrayList<String> blogurl = new ArrayList<>();

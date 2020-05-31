@@ -25,7 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SubActivity extends AppCompatActivity {
+public class SubActivity extends AppCompatActivity { // 채팅버튼 들어오면 기능들
 
     private Button subb1;
     private Button subb2;

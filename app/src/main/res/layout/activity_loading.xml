@@ -7,104 +7,104 @@
     tools:context=".loading"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#8C8CFF"
-        android:orientation="vertical">
-
-
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="#캐릭톡"
-            android:textSize="100dp"
-            android:gravity="center"
-            android:fontFamily="@font/mainfont"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#A0A0FF"
-        android:orientation="vertical">
-
+        android:layout_weight="1">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/appimg" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#B4B4FF"
-        android:orientation="vertical">
-
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="#궁금한 것"
-            android:textSize="24dp"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/mainfont"/>
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="#부담 없이"
-            android:textSize="24dp"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/mainfont"/>
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="#내 주변에서"
-            android:textSize="24dp"
-            android:gravity="center_horizontal"
-            android:fontFamily="@font/mainfont"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#C8C8FF"
-        android:orientation="vertical"></LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#D2D2FF"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="made_by : SMU_S/W_노준혁/이돈엽/정양훈"
-            android:textSize="20dp"
-            android:fontFamily="@font/mainfont"
-            android:gravity="bottom|center"/>
+            android:layout_weight="1"
+            android:alpha="0.6"
+            android:scaleType="fitXY"
+            android:src="@drawable/main_back" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/mainfont"
+                    android:gravity="center"
+                    android:text="#캐릭톡"
+                    android:textSize="90dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="#궁금한 것"
+                    android:textSize="24dp"
+                    android:gravity="center"
+                    android:fontFamily="@font/mainfont"/>
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="#부담 없이"
+                    android:textSize="24dp"
+                    android:gravity="center"
+                    android:fontFamily="@font/mainfont" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="#내 주변에서"
+                    android:textSize="24dp"
+                    android:gravity="center"
+                    android:fontFamily="@font/mainfont"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:text="made_by : SMU_S/W_노준혁/이돈엽/정양훈"
+                    android:fontFamily="@font/mainfont"
+                    android:textSize="18dp"
+                    android:gravity="bottom|center"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

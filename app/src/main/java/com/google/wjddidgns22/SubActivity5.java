@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SubActivity5 extends AppCompatActivity{
+public class SubActivity5 extends AppCompatActivity{ //조그만 내정보
 
 
     ImageView user_img;

@@ -720,12 +720,13 @@ public class MainActivity extends AppCompatActivity
         //원추가
         this.mGoogleMap.addCircle(circle);                    //<<<<<<<<<<<<<<<<원이 중복으로 출력되는 문제 발생 -> clear로 해결
 
+
         databaseReference.child("유저").child(nicknames).child("캐릭터").setValue(mycharacter);
         databaseReference.child("유저").child(nicknames).child("비밀번호").setValue(password);
         databaseReference.child("유저").child(nicknames).child("언어").setValue(language);
         databaseReference.child("유저").child(nicknames).child("위치").child("위도").setValue(x);
         databaseReference.child("유저").child(nicknames).child("위치").child("경도").setValue(y);
-//캐릭터 생성하면서 입력된 값 자동으로 데이터베이스에 입력 , 위치값 계속 초기화
+        //캐릭터 생성하면서 입력된 값 자동으로 데이터베이스에 입력 , 위치값 계속 초기화
 
         if (mycharacter.equals("라이언")){
             markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker1));
@@ -785,10 +786,7 @@ public class MainActivity extends AppCompatActivity
 
         }
 
-        Users.clear();
-        Usersch.clear();
-        usersk.clear();
-        usersw.clear();
+   
         // 주변사람 마커 계속해서 찍히는 현상 제거
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  오벨리스크 마커

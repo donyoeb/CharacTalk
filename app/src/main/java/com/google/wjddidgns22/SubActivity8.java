@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -20,7 +19,7 @@ import java.util.List;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SubActivity8 extends AppCompatActivity {
+public class SubActivity8 extends AppCompatActivity {    //   나에게 온 메시지함
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
