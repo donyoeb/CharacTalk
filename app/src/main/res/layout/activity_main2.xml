@@ -110,19 +110,33 @@
         android:fontFamily="@font/mainfont"
         android:paddingTop="50dp"/>
 
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="136dp"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnlogin"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="100dp"
-        android:background="@drawable/button"
-        android:fontFamily="@font/mainfont"
-        android:text="ENTER"
-        android:textColor="#000000" />
+        <Button
+            android:id="@+id/btnlogin1"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button"
+            android:fontFamily="@font/mainfont"
+            android:text="신규 가입"
+            android:textColor="#000000" />
 
+        <Button
+            android:id="@+id/btnlogin2"
+            android:layout_width="150dp"
+            android:layout_marginLeft="20dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button"
+            android:fontFamily="@font/mainfont"
+            android:text="로그인"
+            android:textColor="#000000" />
 
+    </LinearLayout>
 </LinearLayout>
 
 </LinearLayout>

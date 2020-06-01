@@ -1103,6 +1103,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+
             }
         };
         mReference.addChildEventListener(mChild);
@@ -1125,5 +1126,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onMarkerClick(Marker marker){
         return true;
     }
+
 }
 
