@@ -78,10 +78,9 @@ public class MainActivity extends AppCompatActivity
     private String markerTitle; // 내 닉네임
     private String markerSnippet; //내 위치 한글화버전
 
-
     private int markerflag;
-    private String mycharacter;
 
+    private String mycharacter;
 
     private ArrayList<String> Users = new ArrayList<>();   //유저 저장을 위한 리스트
     private ArrayList<String> Usersch = new ArrayList<>();
@@ -97,8 +96,6 @@ public class MainActivity extends AppCompatActivity
     private String password;
     private String language;
 
-
-
     private ArrayList<String> Users_nick = new ArrayList<>();   //유저 저장을 위한 리스트
     private ArrayList<String> Users_pass = new ArrayList<>();   //유저 저장을 위한 리스트
     private ArrayList<String> Users_lang = new ArrayList<>();   //유저 저장을 위한 리스트
@@ -108,22 +105,19 @@ public class MainActivity extends AppCompatActivity
     private String user_la;
     private String user_ch;
 
-
-
     private double x,y; // 위도경도
 
     private GoogleApiClient mGoogleApiClient = null;
     private GoogleMap mGoogleMap = null;
 
     private Marker currentMarker = null;
-
-
+    private Marker currentMarker2 = null;
 
     private static final String TAG = "googlemap_example";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2002;
-    private static final int UPDATE_INTERVAL_MS = 2000;  // 1초 마다 업데이트
-    private static final int FASTEST_UPDATE_INTERVAL_MS = 1000; // 0.5초
+    private static final int UPDATE_INTERVAL_MS = 1000;  // 1초 마다 업데이트
+    private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
 
     private AppCompatActivity mActivity;
     boolean askPermissionOnceAgain = false;
@@ -167,11 +161,7 @@ public class MainActivity extends AppCompatActivity
             topkList.add(127.15523);
         }
 
-
-
 ///////////////////////////////////////////////////////////////////////////////////////   오벨리스크 위치값  직접 입력
-
-
 
         for(int i = 0 ; i<topnameList.size();i++){
             String s = topnameList.get(i);
@@ -235,7 +225,6 @@ public class MainActivity extends AppCompatActivity
                 intent1.putExtra("비밀번호",password);
                 intent1.putExtra("사용언어",language);
 
-
                 startActivity(intent1); // 액티비티를 시작해보아요!
 
             }
@@ -248,6 +237,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
 
                 Users.clear();
+                Usersch.clear();
                 usersk.clear();
                 usersw.clear();
                 //cnt = 0;  // 카운트를 0으로해서 저장값 초기화하려하기엔 오버되는 사람들의 데이터는 저장되어있고 초기화가 안됨 새로운방법 필요함!
@@ -281,15 +271,20 @@ public class MainActivity extends AppCompatActivity
                                 // 데이터베이스에서 "위치"의 key 가져오기 (ex 상명대위치)
 
                                 if (result > 5) { //5m 반경 이상인 유저 정보만 배열에 저장
-                                    Usersch.add(user_ch);
-                                    Users.add(usernickname);
-                                    usersk.add(tmpk);
-                                    usersw.add(tmpw);
 
+                                    if (usernickname.equals(mynick)){
+                                        //내 캐릭터는 주변에 넣지않음
+                                    }
+                                    else{
+                                        Usersch.add(user_ch);
+                                        Users.add(usernickname);
+                                        usersk.add(tmpk);
+                                        usersw.add(tmpw);
+
+                                    }
 
                                  }
                                 //주변 반경 사람들 카운트해서 배열에 저장함
-
 
                             }
 
@@ -302,11 +297,8 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
 
-
-
             }
         });
-
 
         buttonmap3 = (Button) findViewById(R.id.buttonmap3); // 유저 클릭이벤트 버튼
         buttonmap3.setOnClickListener(new View.OnClickListener() {
@@ -333,44 +325,37 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
 
 
-                        mReference1 = mDatabase.getReference("유저"); // 변경값을 확인할 child 이름
-                        mReference1.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
+                mReference1 = mDatabase.getReference("유저"); // 변경값을 확인할 child 이름
+                mReference1.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                for (DataSnapshot i : dataSnapshot.getChildren()) {
-                                    String n = i.getKey();
-                                    String p = i.child("비밀번호").getValue().toString();
-                                    String l = i.child("언어").getValue().toString();
+                        for (DataSnapshot i : dataSnapshot.getChildren()) {
+                            String n = i.getKey();
+                            String p = i.child("비밀번호").getValue().toString();
+                            String l = i.child("언어").getValue().toString();
 
+                            Users_nick.add(n);
+                            Users_pass.add(p);
+                            Users_lang.add(l);
 
-                                    Users_nick.add(n);
-                                    Users_pass.add(p);
-                                    Users_lang.add(l);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
 
-                                }
-                            }
-
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-
-
-                        });
+                });
                 for (int i=0;i<Users_nick.size();i++){
 
-                            String n = Users_nick.get(i);
-                            String p = Users_pass.get(i);
-                            String l = Users_lang.get(i);
+                    String n = Users_nick.get(i);
+                    String p = Users_pass.get(i);
+                    String l = Users_lang.get(i);
 
-                            if (n.equals(nicknames)){ // 나의 닉네임에 맞는 패스워드와 언어 값 가져오기
-                                user_pa = p;
-                                user_la = l;
-
-                            }
-
+                    if (n.equals(nicknames)){ // 나의 닉네임에 맞는 패스워드와 언어 값 가져오기
+                        user_pa = p;
+                        user_la = l;
+                    }
 
                 }
 
@@ -385,7 +370,7 @@ public class MainActivity extends AppCompatActivity
                     startActivity(intent3); // 액티비티를 시작해보아요!
                 }
                 else {
-                  Toast.makeText(MainActivity.this,"다시 실행해주세요.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"다시 실행해주세요.",Toast.LENGTH_SHORT).show();
                 }
 
                 Users_nick.clear();
@@ -394,7 +379,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
 
        /* buttonmap6 = (Button) findViewById(R.id.buttonmap6); //번역버튼 클릭이벤트 버튼
         buttonmap6.setOnClickListener(new View.OnClickListener() {
@@ -407,8 +391,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 */
-
-
 
     }
     @Override
@@ -434,7 +416,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
     private void startLocationUpdates() {
 
         if (!checkLocationServicesStatus()) {
@@ -458,10 +439,7 @@ public class MainActivity extends AppCompatActivity
             mGoogleMap.setMyLocationEnabled(true);
 
         }
-
     }
-
-
 
     private void stopLocationUpdates() {
 
@@ -470,8 +448,6 @@ public class MainActivity extends AppCompatActivity
         mRequestingLocationUpdates = false;
     }
 
-
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
@@ -479,18 +455,13 @@ public class MainActivity extends AppCompatActivity
 
         mGoogleMap = googleMap;
 
-
         //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
         //지도의 초기위치를 서울로 이동
 
         setDefaultLocation();   // 초기 위치 가져오기
 
-
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(17));   //줌 조절 여기있~  // 카메라 줌설정 넓게는 숫자내리기 가까이는 올리기
-
-
-
 
         mGoogleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener(){
 
@@ -532,14 +503,10 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onCameraMove() {
-
-
             }
         });
 
-
     }
-
 
     @Override
     public void onLocationChanged(Location location) {  // 마커타이틀,스닛펫 설정
@@ -556,13 +523,13 @@ public class MainActivity extends AppCompatActivity
 
         mGoogleMap.clear(); // 원이 중복되서 생기는걸 방지해줌 모든낙서 지우기
 
+
         //현재 위치에 마커 생성하고 이동
         setCurrentLocation(location, markerTitle, markerSnippet);
 
         mCurrentLocatiion = location;
 
     }
-
 
     @Override
     protected void onStart() {
@@ -572,7 +539,6 @@ public class MainActivity extends AppCompatActivity
             Log.d(TAG, "onStart: mGoogleApiClient connect");
             mGoogleApiClient.connect();
         }
-
         super.onStart();
     }
 
@@ -590,14 +556,11 @@ public class MainActivity extends AppCompatActivity
             Log.d(TAG, "onStop : mGoogleApiClient disconnect");
             mGoogleApiClient.disconnect();
         }
-
         super.onStop();
     }
 
-
     @Override
     public void onConnected(Bundle connectionHint) {
-
 
         if ( mRequestingLocationUpdates == false ) {
 
@@ -659,7 +622,6 @@ public class MainActivity extends AppCompatActivity
         List<Address> addresses;
 
         try {
-
             addresses = geocoder.getFromLocation(
                     latlng.latitude,
                     latlng.longitude,
@@ -671,14 +633,10 @@ public class MainActivity extends AppCompatActivity
         } catch (IllegalArgumentException illegalArgumentException) {
             Toast.makeText(this, "잘못된 GPS 좌표", Toast.LENGTH_LONG).show();
             return "잘못된 GPS 좌표";
-
         }
-
-
         if (addresses == null || addresses.size() == 0) {
             Toast.makeText(this, "주소 미발견", Toast.LENGTH_LONG).show();
             return "주소 미발견";
-
         } else {
             Address address = addresses.get(0);
             return address.getAddressLine(0);
@@ -700,6 +658,7 @@ public class MainActivity extends AppCompatActivity
 
         mGoogleMap.setOnMarkerClickListener(markerClickListener);   // 마커클릭 리스너
         if (currentMarker != null) currentMarker.remove();   //마커 중복 출력 지우기
+        if (currentMarker2 != null) currentMarker2.remove();
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 내위치 마커
@@ -719,7 +678,6 @@ public class MainActivity extends AppCompatActivity
 
         //원추가
         this.mGoogleMap.addCircle(circle);                    //<<<<<<<<<<<<<<<<원이 중복으로 출력되는 문제 발생 -> clear로 해결
-
 
         databaseReference.child("유저").child(nicknames).child("캐릭터").setValue(mycharacter);
         databaseReference.child("유저").child(nicknames).child("비밀번호").setValue(password);
@@ -746,9 +704,7 @@ public class MainActivity extends AppCompatActivity
         }
         currentMarker = mGoogleMap.addMarker(markerOptions);
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 주변캐릭터 마커
-
 
         for(int i = 0; i<Users.size() ; i++){  //주변사람 위치값을 기준으로 마커 띄우기
             double a,b;
@@ -756,7 +712,6 @@ public class MainActivity extends AppCompatActivity
             b = usersk.get(i);
             //int flag = 0 ;
             MarkerOptions markerOptions1 = new MarkerOptions();
-
 
             LatLng user = new LatLng(a,b);
 
@@ -781,18 +736,12 @@ public class MainActivity extends AppCompatActivity
                 return;
             }
 
-
-           mGoogleMap.addMarker(markerOptions1);
+           currentMarker2 =  mGoogleMap.addMarker(markerOptions1);
 
         }
-
-   
         // 주변사람 마커 계속해서 찍히는 현상 제거
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  오벨리스크 마커
-
-
-
 
         int topsize = topnameList.size();              //내 위치값 기준으로 주변의 오벨리스크 마커 띄우기
         for(int i = 0; i<topsize ; i++){
@@ -818,9 +767,7 @@ public class MainActivity extends AppCompatActivity
 
             }
 
-
         }
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////   유저 마커
 
@@ -834,9 +781,12 @@ public class MainActivity extends AppCompatActivity
         }
 
 
+        Users.clear();;
+        Usersch.clear();
+        usersk.clear();
+        usersw.clear();
 
     }
-
 
     //  마커 클릭 리스너
     GoogleMap.OnMarkerClickListener markerClickListener = new GoogleMap.OnMarkerClickListener() {    //탑 마커 클릭리스너
@@ -941,7 +891,6 @@ public class MainActivity extends AppCompatActivity
         }
     };
 
-
     public void setDefaultLocation() {
 
         mMoveMapByUser = false;
@@ -952,7 +901,6 @@ public class MainActivity extends AppCompatActivity
         String markerTitle = "위치정보 가져올 수 없음";
         String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
 
-
         if (currentMarker != null) currentMarker.remove();
 
         MarkerOptions markerOptions = new MarkerOptions();
@@ -962,15 +910,11 @@ public class MainActivity extends AppCompatActivity
         markerOptions.draggable(true);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
-
-
-
         currentMarker = mGoogleMap.addMarker(markerOptions);
 
         mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION,14)); // 줌조절은 위에있음
 
     }
-
 
     //여기부터는 런타임 퍼미션 처리을 위한 메소드들
     @TargetApi(Build.VERSION_CODES.M)
@@ -1021,15 +965,12 @@ public class MainActivity extends AppCompatActivity
                     mGoogleApiClient.connect();
                 }
 
-
-
             } else {
 
                 checkPermissions();
             }
         }
     }
-
 
     @TargetApi(Build.VERSION_CODES.M)
     private void showDialogForPermission(String msg) {
@@ -1080,7 +1021,6 @@ public class MainActivity extends AppCompatActivity
         builder.create().show();
     }
 
-
     //여기부터는 GPS 활성화를 위한 메소드들
     private void showDialogForLocationServiceSetting() {
 
@@ -1106,7 +1046,6 @@ public class MainActivity extends AppCompatActivity
         builder.create().show();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -1130,7 +1069,6 @@ public class MainActivity extends AppCompatActivity
                         return;
                     }
                 }
-
                 break;
         }
     }
@@ -1140,7 +1078,6 @@ public class MainActivity extends AppCompatActivity
         mDatabase = FirebaseDatabase.getInstance();
 
         mReference = mDatabase.getReference();
-
 
         mChild = new ChildEventListener() {
 
@@ -1170,7 +1107,6 @@ public class MainActivity extends AppCompatActivity
         };
         mReference.addChildEventListener(mChild);
 
-
     }
 
     @Override
@@ -1185,7 +1121,6 @@ public class MainActivity extends AppCompatActivity
                 Math.sin(latitude1) * Math.sin(latitude2)
                         + Math.cos(latitude1) * Math.cos(latitude2) * Math.cos(longitude2 - longitude1))/100;
     }
-
 
     public boolean onMarkerClick(Marker marker){
         return true;
